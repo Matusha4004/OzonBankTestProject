@@ -5,6 +5,7 @@ using OzonBankTestProject.Domain;
 using OzonBankTestProject.Infrastructure;
 using ReportService.Api;
 using Xunit;
+using Assert = Xunit.Assert;
 
 public class GrpcServiceTests
 {
