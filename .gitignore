@@ -1,0 +1,63 @@
+﻿# Build
+bin/
+obj/
+out/
+
+# IDE
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# DotNet tools
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific
+*.swp
+*.tmp
+*.tmp.*
+*.bak
+*.ncb
+*.opendb
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Proto generated files
+**/*.pb.cs
+**/*.g.cs
+
+# Test results
+TestResult*/
+build.log
+nunit-*.xml
+
+# Coverage
+coverage*.xml
+*.coverage
+*.coveragexml
+
+# Secrets
+secrets.json
+
+# Docker
+docker-compose.override.yml
+
+# Kafka data (if running locally)
+kafka-data/
+zookeeper-data/
+
+# EF Core Migrations snapshot
+*Migrations/

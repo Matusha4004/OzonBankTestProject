@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ReportService.Api";
+
+package report;
+
+// gRPC-сервис
+service Report {
+  rpc CreateReport (CreateReportRequest) returns (CreateReportResponse);
+}
+
+// Сообщения
+message CreateReportRequest {
+  string periodStart = 1;
+  string periodEnd = 2;
+  string productId = 3;
+  string orderId = 4;
+}
+
+message CreateReportResponse {
+  double ratio = 1;
+  int32 payments = 2;
+}
+
+

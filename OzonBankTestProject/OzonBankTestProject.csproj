@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-OzonBankTestProject-e334ab35-69a7-4d8b-b788-591fbcd8e50c</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.56.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.23.1" />
+        <PackageReference Include="Grpc.Tools" Version="2.56.0" PrivateAssets="All" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1"/>
+        <PackageReference Include="Confluent.Kafka" Version="2.11.0"/>
+        <Protobuf Include="src\API\Protos\report.proto" GrpcServices="Both" />
+    </ItemGroup>
+</Project>

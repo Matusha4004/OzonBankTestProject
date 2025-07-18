@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonBankTestProject", "OzonBankTestProject\OzonBankTestProject.csproj", "{3BCBBC1F-445F-4A28-8B2A-7A9D145F7E93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{09A3DBB8-768B-4ED8-9111-813B4F61024F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BCBBC1F-445F-4A28-8B2A-7A9D145F7E93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BCBBC1F-445F-4A28-8B2A-7A9D145F7E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BCBBC1F-445F-4A28-8B2A-7A9D145F7E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BCBBC1F-445F-4A28-8B2A-7A9D145F7E93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A3DBB8-768B-4ED8-9111-813B4F61024F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A3DBB8-768B-4ED8-9111-813B4F61024F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A3DBB8-768B-4ED8-9111-813B4F61024F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A3DBB8-768B-4ED8-9111-813B4F61024F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
