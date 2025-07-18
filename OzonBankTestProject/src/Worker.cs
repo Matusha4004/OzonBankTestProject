@@ -31,7 +31,6 @@ public class Worker : BackgroundService
 
         consumer.Subscribe(_requestTopic);
 
-        // Создаём gRPC клиент для обращения к своему сервису
         var channel = GrpcChannel.ForAddress("http://localhost:5000");
         var grpcClient = new Report.ReportClient(channel);
 
@@ -41,18 +40,14 @@ public class Worker : BackgroundService
             {
                 var consumeResult = consumer.Consume(stoppingToken);
 
-                // Десериализация protobuf запроса из Kafka
                 var request = CreateReportRequest.Parser.ParseFrom(consumeResult.Message.Value);
                 
-                // Отправляем запрос в gRPC сервис
                 var reply = await grpcClient.CreateReportAsync(request, cancellationToken: stoppingToken);
 
-                // Сериализуем ответ в protobuf байты
                 using var ms = new MemoryStream();
                 reply.WriteTo(ms);
                 var responseBytes = ms.ToArray();
 
-                // Отправляем ответ в Kafka
                 await producer.ProduceAsync(_responseTopic, new Message<string, byte[]>
                 {
                     Key = consumeResult.Message.Key,
@@ -63,7 +58,6 @@ public class Worker : BackgroundService
         }
         catch (OperationCanceledException)
         {
-            // graceful shutdown
         }
         finally
         {

@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Microsoft.EntityFrameworkCore;
 using OzonBankTestProject.Domain;
 using OzonBankTestProject.Infrastructure;
 using ReportService.Api;
@@ -24,26 +23,34 @@ public class GrpcService : Report.ReportBase
         
         string hashKey = $"{request.ProductId}|{request.OrderId}|{DateTime.Parse(request.PeriodStart):o}|{DateTime.Parse(request.PeriodEnd):o}";
 
-        
-        if (!_reportCache.TryGet(hashKey, out Tuple<double,int>? reportAnswer))
+        try
         {
-            var newReport = new ReportEntity
-            {
-                Id = Guid.NewGuid(),
-                ProductId = request.ProductId,
-                OrderId = request.OrderId,
-                PeriodStart = DateTime.Parse(request.PeriodStart),
-                PeriodEnd = DateTime.Parse(request.PeriodEnd),
-                CreatedAt = DateTime.UtcNow,
-                Status = "Pending"
-            };
+            
 
-            var answer = await _calculator.CalculateRatio(newReport);
-            _dbContext.Reports.Add(newReport);
-            newReport.Status = "Completed"; 
-            newReport.Ratio = answer.Item1;
-            await _dbContext.SaveChangesAsync();
-            _reportCache.Set(hashKey, answer);
+            if (!_reportCache.TryGet(hashKey, out Tuple<double, int>? reportAnswer))
+            {
+                var newReport = new ReportEntity
+                {
+                    Id = Guid.NewGuid(),
+                    ProductId = request.ProductId,
+                    OrderId = request.OrderId,
+                    PeriodStart = DateTime.Parse(request.PeriodStart),
+                    PeriodEnd = DateTime.Parse(request.PeriodEnd),
+                    CreatedAt = DateTime.UtcNow,
+                    Status = "Pending"
+                };
+
+                var answer = await _calculator.CalculateRatio(newReport);
+                _dbContext.Reports.Add(newReport);
+                newReport.Status = "Completed";
+                newReport.Ratio = answer.Item1;
+                await _dbContext.SaveChangesAsync();
+                _reportCache.Set(hashKey, answer);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);  
         }
 
         _reportCache.TryGet(hashKey, out Tuple<double, int>? report);
