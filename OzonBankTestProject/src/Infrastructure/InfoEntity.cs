@@ -3,10 +3,10 @@
 public class InfoEntity
 {
     public Guid Id { get; set; }
-    
-    public string IdProduct { get; set; }
-    
-    public string IdFigure { get; set; }
+
+    public string IdProduct { get; set; } = null!;
+
+    public string IdFigure { get; set; } = null!;
 
     public int Viewers { get; set; }
     

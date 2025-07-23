@@ -4,5 +4,5 @@ namespace OzonBankTestProject.Domain;
 
 public interface ICalculateRatio
 {
-    Task<Tuple<double, int>?> CalculateRatio(ReportEntity reportEntity);
+    Task<Tuple<double, int>> CalculateRatio(ReportEntity reportEntity);
 }

@@ -1,27 +1,22 @@
-﻿services:
+﻿version: "3.9"
+services:
   postgres:
     image: postgres:15
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: ozonbankdb
+      POSTGRES_DB: OzonBank
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
-  
-  zookeeper:
-    image: bitnami/zookeeper:3.8
-    container_name: zookeeper
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    ports:
-      - "2181:2181"
+
   kafka:
     image: bitnami/kafka:3.6.1
     container_name: kafka
     environment:
+      - KAFKA_ENABLE_KRAFT=yes
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=broker,controller
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
@@ -33,17 +28,18 @@
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - ALLOW_PLAINTEXT_LISTENER=yes
-    depends_on:
-      - zookeeper
     ports:
       - "9092:9092"
+    volumes:
+      - kafkadata:/bitnami/kafka
 
   app:
     build: .
+    container_name: ozonbank-app
     ports:
       - "5000:5000"
     environment:
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=ozonbankdb;Username=user;Password=password
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=OzonBank;Username=postgres;Password=123
       - Kafka__BootstrapServers=kafka:9092
     depends_on:
       - kafka
@@ -51,3 +47,4 @@
 
 volumes:
   pgdata:
+  kafkadata:
